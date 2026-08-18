@@ -1,0 +1,58 @@
+/* Design tokens for Cali Personal Injury Lawyer.
+   Font tokens are wired separately in app/globals.css so they can alias the
+   runtime CSS variables injected by next/font. */
+
+@theme {
+  /* Deep Ink / Soft Charcoal */
+  --color-ink-950: #0b0d12;
+  --color-ink-900: #12151c;
+  --color-ink-800: #1e2330;
+  --color-charcoal-700: #2b303b;
+
+  /* Warm White / Cool White */
+  --color-warm-white: #faf7f2;
+  --color-cool-white: #f3f5f8;
+
+  /* Accent Highlight (restrained brass/gold) */
+  --color-accent-300: #e3cfa0;
+  --color-accent-400: #c9a66b;
+  --color-accent-500: #ad8748;
+  --color-accent-600: #8c6b34;
+
+  /* Muted Accent (restrained slate blue, conveys trust/calm) */
+  --color-trust-500: #4a6483;
+  --color-trust-600: #3a5068;
+  --color-trust-700: #2c3d51;
+
+  /* Glass White / Glass Dark */
+  --color-glass-light: rgba(255, 255, 255, 0.6);
+  --color-glass-light-strong: rgba(255, 255, 255, 0.78);
+  --color-glass-dark: rgba(18, 21, 28, 0.55);
+  --color-glass-dark-strong: rgba(18, 21, 28, 0.75);
+
+  /* Large rounded containers */
+  --radius-2xl: 1.5rem;
+  --radius-3xl: 2rem;
+  --radius-4xl: 2.75rem;
+
+  /* Soft, layered shadows for glass surfaces */
+  --shadow-glass-sm: 0 1px 1px rgba(11, 13, 18, 0.04), 0 8px 24px -12px rgba(11, 13, 18, 0.25);
+  --shadow-glass-lg: 0 1px 1px rgba(11, 13, 18, 0.04), 0 24px 64px -24px rgba(11, 13, 18, 0.35);
+  --shadow-elevated: 0 24px 48px -20px rgba(11, 13, 18, 0.35);
+
+  /* Premium, consistent easing for micro-interactions */
+  --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Subtle ambient float for decorative elements */
+  --animate-float: float 8s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
