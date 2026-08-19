@@ -122,12 +122,13 @@ export default function ContactForm() {
                 {practiceAreas.map((area) => {
                   const Icon = iconMap[area.icon];
                   const isSelected = field.value === area.slug;
-
                   return (
                     <button
                       key={area.slug}
                       type='button'
                       aria-pressed={isSelected}
+                      name='what-happened'
+                      defaultValue={area.title}
                       onClick={() => field.onChange(area.slug)}
                       className={cn(
                         'flex flex-col items-center gap-2 rounded-2xl border px-3 py-4 text-center text-xs font-medium transition-all duration-300 ease-premium',
