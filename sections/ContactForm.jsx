@@ -4,7 +4,8 @@
 
 import { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import emailjs from '@emailjs/browser';
+import { ArrowRight, CheckCircle2, AlertCircle } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import GlassCard from '@/components/ui/GlassCard';
 import {
@@ -18,8 +19,13 @@ import { practiceAreas } from '@/data/practiceAreas';
 import { practiceAreaIcons as iconMap } from '@/lib/practiceAreaIcons';
 import { cn } from '@/lib/utils';
 
+const EMAILJS_SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+const EMAILJS_TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+const EMAILJS_PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+
 export default function ContactForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState('');
   const {
     register,
     handleSubmit,
@@ -36,9 +42,40 @@ export default function ContactForm() {
     },
   });
 
-  async function onSubmit() {
-    await new Promise((resolve) => setTimeout(resolve, 600));
-    setIsSubmitted(true);
+  async function onSubmit(data) {
+    setSubmitError('');
+
+    if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
+      setSubmitError(
+        'Email service is not configured yet. Please reach out to us directly for now.',
+      );
+      return;
+    }
+
+    const selectedArea = practiceAreas.find(
+      (area) => area.slug === data.situation,
+    );
+
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name: data.name,
+          from_email: data.email,
+          phone: data.phone || 'Not provided',
+          situation: selectedArea ? selectedArea.short : data.situation,
+          message: data.message,
+        },
+        { publicKey: EMAILJS_PUBLIC_KEY },
+      );
+      setIsSubmitted(true);
+    } catch (error) {
+      console.error('EmailJS submission failed:', error);
+      setSubmitError(
+        'Something went wrong sending your message. Please try again, or reach out to us directly.',
+      );
+    }
   }
 
   if (isSubmitted) {
@@ -178,6 +215,18 @@ export default function ContactForm() {
           </label>
           <FormError>{errors.consent?.message}</FormError>
         </div>
+
+        {submitError && (
+          <div
+            role='alert'
+            className='flex items-start gap-2 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700'>
+            <AlertCircle
+              className='mt-0.5 h-4 w-4 shrink-0'
+              aria-hidden='true'
+            />
+            <span>{submitError}</span>
+          </div>
+        )}
 
         <Button
           type='submit'
