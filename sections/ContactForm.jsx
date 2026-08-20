@@ -164,7 +164,7 @@ export default function ContactForm() {
                       key={area.slug}
                       type='button'
                       aria-pressed={isSelected}
-                      name='what-happened'
+                      name='title'
                       defaultValue={area.title}
                       onClick={() => field.onChange(area.slug)}
                       className={cn(

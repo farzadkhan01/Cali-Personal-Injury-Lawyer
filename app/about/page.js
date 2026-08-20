@@ -15,7 +15,7 @@ import Reveal from '@/components/motion/Reveal';
 import TextReveal from '@/components/motion/TextReveal';
 import Process from '@/sections/Process';
 import ResultsTrust from '@/sections/ResultsTrust';
-import AttorneySection from '@/sections/AttorneySection';
+import AttorneySection from '@/styles/AttorneySection';
 import FinalCTA from '@/sections/FinalCTA';
 import { siteConfig } from '@/data/site';
 import Image from 'next/image';

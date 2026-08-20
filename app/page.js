@@ -7,7 +7,7 @@ import PracticeAreas from '@/sections/PracticeAreas';
 import Process from '@/sections/Process';
 import ResultsTrust from '@/sections/ResultsTrust';
 import Testimonials from '@/sections/Testimonials';
-import AttorneySection from '@/sections/AttorneySection';
+import AttorneySection from '@/styles/AttorneySection';
 import FAQ from '@/sections/FAQ';
 import FinalCTA from '@/sections/FinalCTA';
 
